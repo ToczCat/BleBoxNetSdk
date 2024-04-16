@@ -1,0 +1,61 @@
+name: 'Release'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - release**
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+    - name: Prepare
+      run: echo "NUGET_URL=https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" >> $GITHUB_ENV
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.REPOS_ACCESS_TOKEN }}
+        submodules: true
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        global-json-file: global.json
+
+    - name: Restore dependencies
+      run: dotnet restore .
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.15
+      with:
+        versionSpec: '5.x'
+
+    - name: Determine Version
+      id:   gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.15
+      with:
+        useConfigFile: true
+    
+    - name: Build
+      run: dotnet build -c Release --no-restore . -p:RepositoryUrl=${{ github.server_url }}/${{ github.repository }}
+    
+    - name: Test
+      run: dotnet test -c Release --no-build --verbosity normal .
+
+    - name: Pack nugets
+      run: dotnet pack -c Release -o ./Output/ -p:Version=$GitVersion_SemVer --verbosity normal --no-build .
+    
+    - name: Push nugets
+      run: dotnet nuget push "./Output/*.nupkg" --skip-duplicate --source "github" --api-key "${{ secrets.WRITE_PACKAGES_TOKEN }}"
+
+    - name: Tag the commit
+      run: git tag -f v$GitVersion_SemVer
+
+    - name: Push the tag
+      run: git push -f --tags
