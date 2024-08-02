@@ -6,7 +6,7 @@ internal static class Info
 {
     internal class Request() : RequestBase(HttpMethod.Get, "/info") { }
 
-    internal class ResponseResult
+    internal record ResponseResult
     {
         public Device? Device { get; set; }
     }

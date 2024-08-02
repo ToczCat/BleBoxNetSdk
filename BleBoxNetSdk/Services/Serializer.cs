@@ -31,6 +31,9 @@ internal class Serializer : ISerializer
 
     public TResult? DeserializeJson<TResult>(string jsonResult)
     {
+        if (string.IsNullOrEmpty(jsonResult))
+            jsonResult = "{}";
+
         return JsonSerializer.Deserialize<TResult>(jsonResult, _jsonOptions);
     }
 }

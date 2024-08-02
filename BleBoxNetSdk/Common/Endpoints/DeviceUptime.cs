@@ -4,7 +4,7 @@ internal class DeviceUptime
 {
     internal class Request() : RequestBase(HttpMethod.Get, "/api/device/uptime") { }
 
-    internal class ResponseResult
+    internal record ResponseResult
     {
         public TimeSpan UpTimeS { get; set; }
     }

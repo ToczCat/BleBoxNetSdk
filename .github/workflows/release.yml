@@ -19,7 +19,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        token: ${{ secrets.REPOS_ACCESS_TOKEN }}
+        token: ${{ secrets.BLE_ACCESS_TOKEN }}
         submodules: true
         fetch-depth: 0
 
@@ -52,7 +52,7 @@ jobs:
       run: dotnet pack -c Release -o ./Output/ -p:Version=$GitVersion_SemVer --verbosity normal --no-build .
     
     - name: Push nugets
-      run: dotnet nuget push "./Output/*.nupkg" --skip-duplicate --source "github" --api-key "${{ secrets.WRITE_PACKAGES_TOKEN }}"
+      run: dotnet nuget push "./Output/*.nupkg" --skip-duplicate --source "github" --api-key "${{ secrets.BLE_ACCESS_TOKEN }}"
 
     - name: Tag the commit
       run: git tag -f v$GitVersion_SemVer
