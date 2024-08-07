@@ -15,4 +15,11 @@ internal static class Samples
     public static string PerformWiFiDisconnectResponse = """{"ssid":"WiFi_Name","station_status":5,"tunnel_status":0,"apEnable":false,"channel":0}""";
 
     //AirSensor
+    public static string AirSensorDeviceStateResponse = """{"air":{"airQualityLevel":2,"sensors":[{"type":"pm1","value":9,"qualityLevel":-1,"trend":3,"state":0,"elapsedTimeS":15},{"type":"pm2.5","value":14,"qualityLevel":2,"trend":3,"state":0,"elapsedTimeS":15},{"type":"pm10","value":15,"qualityLevel":1,"trend":3,"state":0,"elapsedTimeS":15}]}}""";
+    public static string AirSensorExtendedResponse = """{"air":{"airQualityLevel":2,"sensors":[{"type":"pm1","value":9,"qualityLevel":-1,"trend":3,"state":0,"elapsedTimeS":15},{"type":"pm2.5","value":14,"qualityLevel":2,"trend":3,"state":0,"elapsedTimeS":15},{"type":"pm10","value":15,"qualityLevel":1,"trend":3,"state":0,"elapsedTimeS":15}]}}""";
+    public static string AirSensorRuntimeResponse = """{"runtime":{"timeH":1}}""";
+    public static string AirSensorMeasurementResponse = """{"air":{"airQualityLevel":2,"sensors":[{"type":"pm1","value":9,"qualityLevel":-1,"trend":3,"state":0,"elapsedTimeS":15},{"type":"pm2.5","value":14,"qualityLevel":2,"trend":3,"state":0,"elapsedTimeS":15},{"type":"pm10","value":15,"qualityLevel":1,"trend":3,"state":0,"elapsedTimeS":15}]}}""";
+    public static string AirSensorSettingsResponse = """{"settings":{"sensorApi":{"makeGeolocationCoarse":0},"air":{"mountingPlace":0,"detailedView":1},"deviceName":"My BleBox device name","tunnel":{"enabled":1,"logEnabled":1},"statusLed":{"enabled":1}}}""";
+    public static string AirSensorSetSettingsRequest = """{"settings":{"sensorApi":{"makeGeolocationCoarse":0},"air":{"mountingPlace":0,"detailedView":1},"deviceName":"My BleBox device name","tunnel":{"enabled":1,"logEnabled":1},"statusLed":{"enabled":1}}}""";
+    public static string AirSensorSetSettingsResponse = """{"settings":{"sensorApi":{"makeGeolocationCoarse":0},"air":{"mountingPlace":0,"detailedView":1},"deviceName":"My BleBox device name","tunnel":{"enabled":1,"logEnabled":1},"statusLed":{"enabled":1}}}""";
 }

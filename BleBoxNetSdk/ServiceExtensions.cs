@@ -1,4 +1,5 @@
-﻿using BleBoxNetSdk.Common;
+﻿using BleBoxNetSdk.AirSensor;
+using BleBoxNetSdk.Common;
 using BleBoxNetSdk.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,8 @@ public static class ServiceExtensions
         services
             .AddSingleton<ISerializer, Serializer>()
             .AddSingleton<IApiHttpClient, ApiHttpClient>()
-            .AddSingleton<ICommonApiClient, CommonApiClient>();
+            .AddSingleton<ICommonApiClient, CommonApiClient>()
+            .AddSingleton<IAirSensorApiClient, AirSensorApiClient>();
 
         return services;
     }

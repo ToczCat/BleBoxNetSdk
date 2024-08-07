@@ -49,7 +49,7 @@ namespace BleBoxNetSdk.Common
         Task<Network?> GetNetworkInformation(Uri deviceAddress, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Allows to set interal access Point's ssid and password. Allows also to turn off internal AP
+        /// Allows to set internal access Point's ssid and password. Allows also to turn off internal AP
         /// </summary>
         /// <param name="deviceAddress">Url to desired device</param>
         /// <param name="apEnable">Parameter that show if internal WiFi Access Point is enabled</param>

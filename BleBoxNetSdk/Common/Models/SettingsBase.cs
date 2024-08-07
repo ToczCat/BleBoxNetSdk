@@ -11,11 +11,11 @@ public record SettingsBase
 
 public record StatusLed
 {
-    public Enabled Enabled { get; set; }
+    public Toggle Enabled { get; set; }
 }
 
 public record Tunnel
 {
-    public Enabled Enabled { get; set; }
-    public Enabled LogEnabled { get; set; }
+    public Toggle Enabled { get; set; }
+    public Toggle LogEnabled { get; set; }
 }

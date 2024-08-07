@@ -1,5 +1,6 @@
 ﻿using BleBoxNetSdk.Common;
 using Microsoft.Extensions.Logging;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -34,10 +35,9 @@ internal class ApiHttpClient : IApiHttpClient
         IRequest requestObject,
         CancellationToken cancellationToken)
     {
-        var response = await Send(baseUri, requestObject, cancellationToken);
+        var response = await TrySend(baseUri, requestObject, cancellationToken);
 
-        var serializedResult = await response.Content.ReadAsStringAsync();
-
+        var serializedResult = await response.Content.ReadAsStringAsync(cancellationToken);
         _logger.LogDebug("<- Received response: {response}", serializedResult);
 
         var deserializedResult = _serializer.DeserializeJson<TResult>(serializedResult)
@@ -46,7 +46,7 @@ internal class ApiHttpClient : IApiHttpClient
         return deserializedResult;
     }
 
-    private async Task<HttpResponseMessage> Send(
+    private async Task<HttpResponseMessage> TrySend(
         Uri baseUri,
         IRequest requestObject,
         CancellationToken cancellationToken)
@@ -59,13 +59,16 @@ internal class ApiHttpClient : IApiHttpClient
 
                 var response = await _httpClient.SendAsync(request, cancellationToken);
 
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                    _logger.LogWarning("Requested action is already in progress");
+
                 response.EnsureSuccessStatusCode();
 
                 return response;
             }
             catch (Exception ex) when (count < MaxResendCount)
             {
-                await Task.Delay(TimeSpan.FromSeconds(3));
+                await Task.Delay(TimeSpan.FromSeconds(3), cancellationToken);
 
                 _logger.LogWarning("Request to API failed with exception: {ex}. Resending request {count}", ex, count);
             }
@@ -79,13 +82,11 @@ internal class ApiHttpClient : IApiHttpClient
         IRequest requestObject)
     {
         var request = new HttpRequestMessage(requestObject.HttpMethod, BuildUri(baseUri, requestObject.Uri));
-
         _logger.LogDebug("-> Sending http request to: {uri}", request.RequestUri?.ToString());
 
         if (requestObject.HaveContent)
         {
             var serializedContent = _serializer.SerializeJson(requestObject);
-
 
             _logger.LogDebug("-> With body: {body}", serializedContent);
             request.Content = new StringContent(serializedContent, _encoding, JsonContentType);
