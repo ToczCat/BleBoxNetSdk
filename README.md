@@ -1,10 +1,6 @@
 # BleBoxNetSdk
 
-<div style="text-align: center"><img src="http://blebox.eu/wp-content/themes/blebox/includes/img/logo.svg" height="100px">
-<h2>.NET SDK for your BleBox integration</h2>
-</div>
-
-This SDK allows you to quickly connect, read data and control all supported types of BleBox devices.
+This SDK allows you to quickly connect, read data and control all supported types of [BleBox.eu](https://technical.blebox.eu/) devices.
 
 ## Requirements and technologies
 
