@@ -28,6 +28,14 @@ jobs:
       with:
         global-json-file: global.json
 
+    - name: Add NuGet source
+      run: |
+        dotnet nuget add source "${{ env.NUGET_URL }}" \
+          --username "${{ secrets.BLE_USERNAME }}" \
+          --password "${{ secrets.BLE_ACCESS_TOKEN }}" \
+          --store-password-in-clear-text \
+          --name github
+
     - name: Restore dependencies
       run: dotnet restore .
 
