@@ -10,11 +10,11 @@ public interface ISerializer
     string SerializeJson(object? content);
 }
 
-internal class Serializer : ISerializer
+public class Serializer : ISerializer
 {
     private JsonSerializerOptions _jsonOptions;
 
-    internal Serializer()
+    public Serializer()
     {
         _jsonOptions = new JsonSerializerOptions()
         {

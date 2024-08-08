@@ -11,7 +11,7 @@ public interface IApiHttpClient
     Task<TResult> Send<TResult>(Uri baseUri, IRequest requestObject, CancellationToken cancellationToken);
 }
 
-internal class ApiHttpClient : IApiHttpClient
+public class ApiHttpClient : IApiHttpClient
 {
     private const int MaxResendCount = 3;
     private const string JsonContentType = "application/json";
@@ -21,7 +21,7 @@ internal class ApiHttpClient : IApiHttpClient
     private readonly ISerializer _serializer;
     private readonly Encoding _encoding = Encoding.UTF8;
 
-    internal ApiHttpClient(
+    public ApiHttpClient(
         ILogger<ApiHttpClient> logger,
         ISerializer serializer)
     {

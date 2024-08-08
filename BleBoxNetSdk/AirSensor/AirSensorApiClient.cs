@@ -6,7 +6,7 @@ using BleBoxNetSdk.Services;
 
 namespace BleBoxNetSdk.AirSensor;
 
-internal class AirSensorApiClient(IApiHttpClient apiHttpClient) : IAirSensorApiClient
+public class AirSensorApiClient(IApiHttpClient apiHttpClient) : IAirSensorApiClient
 {
     public async Task<Air?> GetDeviceState(Uri deviceAddress, CancellationToken cancellationToken = default)
     {

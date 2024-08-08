@@ -4,7 +4,7 @@ using BleBoxNetSdk.Services;
 
 namespace BleBoxNetSdk.Common;
 
-internal class CommonApiClient(IApiHttpClient apiHttpClient) : ICommonApiClient
+public class CommonApiClient(IApiHttpClient apiHttpClient) : ICommonApiClient
 {
     public async Task<Device?> Info(Uri deviceAddress, CancellationToken cancellationToken = default)
     {
