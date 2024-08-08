@@ -99,7 +99,7 @@ public class ApiHttpClient : IApiHttpClient
     {
         var builder = new UriBuilder(baseUri);
 
-        builder.Path += builder.Path.TrimEnd('/') + endpoint;
+        builder.Path = builder.Path.TrimEnd('/') + endpoint;
 
         return builder.Uri;
     }
