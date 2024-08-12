@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Product>BleBox .NET SDK</Product>
+    <Copyright>Copyright (C) 2024 Dariusz Garbarz - MIT</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
