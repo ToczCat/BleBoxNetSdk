@@ -1,4 +1,5 @@
 ﻿using BleBoxNetSdk.Common;
+using BleBoxNetSdk.Wrappers;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Text;
@@ -11,24 +12,12 @@ public interface IApiHttpClient
     Task<TResult> Send<TResult>(Uri baseUri, IRequest requestObject, CancellationToken cancellationToken);
 }
 
-public class ApiHttpClient : IApiHttpClient
+public class ApiHttpClient(IHttpClient httpClient, ILogger<ApiHttpClient> logger, ISerializer serializer) : IApiHttpClient
 {
     private const int MaxResendCount = 3;
     private const string JsonContentType = "application/json";
 
-    private readonly HttpClient _httpClient;
-    private readonly ILogger<ApiHttpClient> _logger;
-    private readonly ISerializer _serializer;
     private readonly Encoding _encoding = Encoding.UTF8;
-
-    public ApiHttpClient(
-        ILogger<ApiHttpClient> logger,
-        ISerializer serializer)
-    {
-        _httpClient = new HttpClient();
-        _logger = logger;
-        _serializer = serializer;
-    }
 
     public async Task<TResult> Send<TResult>(
         Uri baseUri,
@@ -38,9 +27,9 @@ public class ApiHttpClient : IApiHttpClient
         var response = await TrySend(baseUri, requestObject, cancellationToken);
 
         var serializedResult = await response.Content.ReadAsStringAsync(cancellationToken);
-        _logger.LogDebug("<- Received response: {response}", serializedResult);
+        logger.LogDebug("<- Received response: {response}", serializedResult);
 
-        var deserializedResult = _serializer.DeserializeJson<TResult>(serializedResult)
+        var deserializedResult = serializer.DeserializeJson<TResult>(serializedResult)
             ?? throw new JsonException($"Could not deserialize {serializedResult} to {typeof(TResult)}");
 
         return deserializedResult;
@@ -57,20 +46,20 @@ public class ApiHttpClient : IApiHttpClient
             {
                 var request = PrepareRequest(baseUri, requestObject);
 
-                var response = await _httpClient.SendAsync(request, cancellationToken);
+                var response = await httpClient.SendAsync(request, cancellationToken);
 
                 if (response.StatusCode == HttpStatusCode.Conflict)
-                    _logger.LogWarning("Requested action is already in progress");
+                    logger.LogWarning("Requested action is already in progress");
 
                 response.EnsureSuccessStatusCode();
 
                 return response;
             }
-            catch (Exception ex) when (count < MaxResendCount)
+            catch (Exception ex) when (count <= MaxResendCount)
             {
                 await Task.Delay(TimeSpan.FromSeconds(3), cancellationToken);
 
-                _logger.LogWarning("Request to API failed with exception: {ex}. Resending request {count}", ex, count);
+                logger.LogWarning("Request to API failed with exception: {ex}. Resending request {count}", ex, count);
             }
         }
 
@@ -82,13 +71,13 @@ public class ApiHttpClient : IApiHttpClient
         IRequest requestObject)
     {
         var request = new HttpRequestMessage(requestObject.HttpMethod, BuildUri(baseUri, requestObject.Uri));
-        _logger.LogDebug("-> Sending http request to: {uri}", request.RequestUri?.ToString());
+        logger.LogDebug("-> Sending http request to: {uri}", request.RequestUri?.ToString());
 
         if (requestObject.HaveContent)
         {
-            var serializedContent = _serializer.SerializeJson(requestObject);
+            var serializedContent = serializer.SerializeJson(requestObject);
 
-            _logger.LogDebug("-> With body: {body}", serializedContent);
+            logger.LogDebug("-> With body: {body}", serializedContent);
             request.Content = new StringContent(serializedContent, _encoding, JsonContentType);
         }
 
