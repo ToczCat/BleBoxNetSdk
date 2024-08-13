@@ -18,6 +18,7 @@ SDK supports common features for all BleBox devices. (since v.1.0.0)
 Full support:
 
 * airSensor (since v1.0.0)
+* wLightBox (since v1.1.0)
 
 ## Get started
 
@@ -55,6 +56,26 @@ All models deserialization and serialization is 100% tested with examples provid
 * ReadSettings() - Return device's specific settings
 * WriteSettings(string deviceName, Toggle tunnelEnabled, Toggle tunnelLogEnabled, Toggle statusLed, Geolocation geolocation, Mounting mounting, Toggle detailedView) - Allow to set device's specific settings
 
+### IWLightBoxApiClient (20200229)
+
+[wLightBox REST API](https://technical.blebox.eu/openapi_wlightbox/openAPI_wLightBox_20200229.html#tag/Control-and-State)
+
+* ReadStateOfLighting() - Returns information about mode, selected effect, color and transition times
+* WriteSettingsSetStateOfLighting(int effectId, string desiredColor, uint colorFade, uint effectFade, uint effectStep) - Allows to set desired color, effect and transition times
+* ReadExtendedStateOfLighting() - Returns information about mode, selected effect, color, transition times. Additionaly returns favorite colors and effects names
+* WriteSettingsSetStateOfLighting(int effectId, string desiredColor, uint colorFade, uint effectFade, uint effectStep, Dictionary favColors) - Allows to set state of lighting - effect, color, transition times. Additionaly allows to set extended parameters - favorite colors
+* Toggle() - Turning ON/OFF (toggle) last color or effect
+* SetLastState() - Setting last color or effect
+* SetColor(string channels) - Set color
+* AdjustBrightness(Adjust adjust, string channels) - Adjust brightness
+* SetEffect(int effectId) - Turning ON effect with given ID
+* SetColorWithFadeTime(string channels, uint timeMs) - Set color with color fade time in milliseconds
+* SetColorForATime(string channels, int timeS) - Set color for given time
+* SetEffectForATime(int effectId, int timeS) - Turning ON effect with given ID
+* SetColorWithFadeForATime(string channels, uint timeMs, int timeS) - Set color with color fade time for given time
+* ReadSettings() - Return device's specific settings
+* WriteSettings(string deviceName, Toggle tunnelEnabled, Toggle statusLed, PwmFrequency pwmFrequency, ColorMode? colorMode = null, OutputMode? outputMode = null, ButtonMode? buttonMode = null) - Allow to set device's specific settings
+
 ## Contributing
 
-Feel free to add features, features requests and issues.
+Feel free to add features requests and report issues.

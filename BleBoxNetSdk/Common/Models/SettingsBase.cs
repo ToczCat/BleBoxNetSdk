@@ -17,5 +17,5 @@ public record StatusLed
 public record Tunnel
 {
     public Toggle Enabled { get; set; }
-    public Toggle LogEnabled { get; set; }
+    public Toggle? LogEnabled { get; set; }
 }
