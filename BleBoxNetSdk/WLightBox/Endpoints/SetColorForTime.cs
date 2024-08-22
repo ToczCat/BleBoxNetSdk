@@ -1,5 +1,5 @@
 ﻿using BleBoxNetSdk.Common;
-using BleBoxNetSdk.WLightBox.Models;
+using BleBoxModels.WLightBox.Models;
 
 namespace BleBoxNetSdk.WLightBox.Endpoints;
 

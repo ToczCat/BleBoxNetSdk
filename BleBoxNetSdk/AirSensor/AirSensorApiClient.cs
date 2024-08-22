@@ -1,7 +1,7 @@
 ﻿using BleBoxNetSdk.AirSensor.Endpoints;
-using BleBoxNetSdk.AirSensor.Enums;
-using BleBoxNetSdk.AirSensor.Models;
-using BleBoxNetSdk.Common.Enums;
+using BleBoxModels.AirSensor.Enums;
+using BleBoxModels.AirSensor.Models;
+using BleBoxModels.Common.Enums;
 using BleBoxNetSdk.Services;
 
 namespace BleBoxNetSdk.AirSensor;

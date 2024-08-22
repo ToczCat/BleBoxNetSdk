@@ -1,6 +1,5 @@
-﻿using BleBoxNetSdk.AirSensor.Models;
-using BleBoxNetSdk.Common;
-using BleBoxNetSdk.WLightBox.Models;
+﻿using BleBoxNetSdk.Common;
+using BleBoxModels.WLightBox.Models;
 
 namespace BleBoxNetSdk.WLightBox.Endpoints;
 

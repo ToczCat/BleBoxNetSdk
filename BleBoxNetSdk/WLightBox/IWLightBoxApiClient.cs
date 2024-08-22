@@ -1,6 +1,6 @@
-﻿using BleBoxNetSdk.Common.Enums;
-using BleBoxNetSdk.WLightBox.Enums;
-using BleBoxNetSdk.WLightBox.Models;
+﻿using BleBoxModels.Common.Enums;
+using BleBoxModels.WLightBox.Enums;
+using BleBoxModels.WLightBox.Models;
 
 namespace BleBoxNetSdk.WLightBox;
 public interface IWLightBoxApiClient

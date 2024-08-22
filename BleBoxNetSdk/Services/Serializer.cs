@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
-using BleBoxNetSdk.Common.JsonConverters;
+using BleBoxModels.Common.JsonConverters;
 
 namespace BleBoxNetSdk.Services;
 

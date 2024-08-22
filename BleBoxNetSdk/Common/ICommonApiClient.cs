@@ -1,4 +1,4 @@
-﻿using BleBoxNetSdk.Common.Models;
+﻿using BleBoxModels.Common.Models;
 
 namespace BleBoxNetSdk.Common
 {

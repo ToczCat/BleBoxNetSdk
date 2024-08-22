@@ -1,8 +1,8 @@
-﻿using BleBoxNetSdk.Common.Enums;
-using BleBoxNetSdk.Common.Models;
+﻿using BleBoxModels.Common.Enums;
+using BleBoxModels.Common.Models;
 using BleBoxNetSdk.Common;
-using BleBoxNetSdk.WLightBox.Models;
-using BleBoxNetSdk.WLightBox.Enums;
+using BleBoxModels.WLightBox.Models;
+using BleBoxModels.WLightBox.Enums;
 
 namespace BleBoxNetSdk.WLightBox.Endpoints;
 

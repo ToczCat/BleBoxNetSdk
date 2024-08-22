@@ -1,5 +1,5 @@
 ﻿using BleBoxNetSdk.Common.Endpoints;
-using BleBoxNetSdk.Common.Models;
+using BleBoxModels.Common.Models;
 using BleBoxNetSdk.Services;
 
 namespace BleBoxNetSdk.Common;

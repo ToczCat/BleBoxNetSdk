@@ -1,4 +1,4 @@
-﻿using BleBoxNetSdk.Common.JsonConverters;
+﻿using BleBoxModels.Common.JsonConverters;
 using FluentAssertions;
 using System.Text;
 using System.Text.Json;

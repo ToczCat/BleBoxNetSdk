@@ -1,4 +1,4 @@
-﻿using BleBoxNetSdk.AirSensor.Models;
+﻿using BleBoxModels.AirSensor.Models;
 using BleBoxNetSdk.Common;
 
 namespace BleBoxNetSdk.AirSensor.Endpoints;

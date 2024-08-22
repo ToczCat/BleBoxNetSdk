@@ -1,9 +1,9 @@
 ﻿using BleBoxNetSdk.AirSensor.Endpoints;
-using BleBoxNetSdk.AirSensor.Enums;
+using BleBoxModels.AirSensor.Enums;
 using BleBoxNetSdk.Common.Endpoints;
-using BleBoxNetSdk.Common.Enums;
+using BleBoxModels.Common.Enums;
 using BleBoxNetSdk.WLightBox.Endpoints;
-using BleBoxNetSdk.WLightBox.Enums;
+using BleBoxModels.WLightBox.Enums;
 
 namespace BleBoxNetSdk.Tests;
 
