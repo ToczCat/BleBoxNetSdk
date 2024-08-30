@@ -9,7 +9,7 @@ namespace BleBoxNetSdk;
 
 public static class ServiceExtensions
 {
-    public static IServiceCollection RegisterSdkServices(this IServiceCollection services)
+    public static IServiceCollection AddBleBoxSdk(this IServiceCollection services)
     {
         services
             .AddSingleton<ISerializer, Serializer>()

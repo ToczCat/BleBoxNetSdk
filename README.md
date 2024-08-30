@@ -4,12 +4,13 @@ This SDK allows you to quickly connect, read data and control all supported type
 
 ## Requirements and technologies
 
-Project is based on .NET 8 with no external dependencies.   
+Project is based on .NET 8.    
 
 It uses:
 
 * Microsoft.Extensions.DependencyInjection.Abstractions 8+
 * Microsoft.Extensions.Logging.Abstractions 8+
+* BleBoxModels 1.0.0
 
 ## Supported devices
 
@@ -22,7 +23,7 @@ Full support:
 
 ## Get started
 
-* Use the IServiceCollection extension method **RegisterSdkServices()** to register all necessary dependencies for the internal services
+* Use the IServiceCollection extension method **AddBleBoxSdk()** to register all necessary dependencies for the internal services
 * Register **ILogger** from Microsoft.Extensions.Logging.Abstractions to provide logging service for SDK
 * Resolve api client for your BleBox device
 * Use provided methods with device address, additional parameters (if needed) and optionally with your own cancellation token
