@@ -4,12 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Company>ToczCat</Company>
     <Product>BleBox .NET SDK</Product>
     <Copyright>Copyright (C) 2024 Dariusz Garbarz - MIT</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BleBoxModels" Version="1.0.0" />
+    <PackageReference Include="BleBoxModels" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
   </ItemGroup>
